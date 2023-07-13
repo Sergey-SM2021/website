@@ -5,3 +5,13 @@ services:
     build: ./backend
     ports:
       - 4200:3000
+  frontend:
+    build: ./frontend
+  nginx:
+    image: nginx:1.24.0-alpine
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html:ro
+    depends_on: 
+      - frontend
+    ports:
+      - 9000:80
